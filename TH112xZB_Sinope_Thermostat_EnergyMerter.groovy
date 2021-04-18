@@ -1,6 +1,6 @@
 /**
  *  Sinope TH1123ZB, TH1124ZB Device Driver for Hubitat
- *  Source: To be added
+ *  Source: https://github.com/sacua/hubitat/blob/main/TH112xZB_Sinope_Thermostat_EnergyMerter.groovy
  *
  *  Code derived from Sinope's SmartThing thermostat for their Zigbee protocol requirements and from the driver of scoulombe79 and kris2k2
  *  Source: https://support.sinopetech.com/en/wp-content/uploads/sites/4/2019/08/Sinope-Technologies-Zigbee-Thermostat-V.1.0.0-SVN-547-1.txt
