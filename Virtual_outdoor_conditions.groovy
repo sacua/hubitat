@@ -1,5 +1,5 @@
 /**
- *  Source: To be added
+ *  Source: https://github.com/sacua/hubitat/blob/main/Virtual_outdoor_conditions.groovy
  *
  *  This virtual device only work in Canada since the temperature and the humidity is taken from Environnement Canada
  *
