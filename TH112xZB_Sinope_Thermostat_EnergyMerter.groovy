@@ -50,12 +50,13 @@ preferences
   input("prefDisplayOutdoorTemp", "bool", title: "Display outdoor temperature", defaultValue: true)
   input("prefKeyLock", "bool", title: "Keylock", description: "Set to true to enable the lock on the thermostat")
 
-  input (name: "energyPrice", type: "number", title: "\$/kWh Cost:", description: "Electric Cost per Kwh in cent", range: "0..*", defaultValue: 9.38)
+  input (name: "energyPrice", type: "float", title: "\$/kWh Cost:", description: "Electric Cost per Kwh in cent", range: "0..*", defaultValue: 9.38)
 
   input (name: "EnergyResetInterv", type: "enum", title: "Reset interval for the energy tracking", options: ["Daily", "Weekly", "Monthly", "Yearly", "Never"], defaultValue: "Daily")
   input (name: "MinInterRep", type: "number", title: "Minimum interval reporting time for energy calculation, 30..600", range: "30..600", defaultValue: 60)
   input (name: "MaxInterRep", type: "number", title: "Maximum interval reporting time for energy calculation, 60..900", range: "60..900", defaultValue: 90)
   input("trace", "bool", title: "Trace", description: "Enable tracing")
+  input (name: "txtEnable", type: "bool", title: "Enable Notification logging", defaultValue: true)
 }
 
 def configure()
@@ -482,12 +483,11 @@ def refresh()
 }
 
 def deviceNotification(text) {
-    //log.info "deviceNotification(${text})"
     double outdoorTemp = text.toDouble()
     def cmds = []
 
     if (settings.prefDisplayOutdoorTemp) {
-        log.info "deviceNotification() : Received outdoor weather : ${text} : ${outdoorTemp}"
+        if (txtEnable) log.info "deviceNotification() : Received outdoor weather : ${text} : ${outdoorTemp}"
     
         //the value sent to the thermostat must be in C
         if (getTemperatureScale() == 'F') {    
