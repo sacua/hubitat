@@ -69,12 +69,19 @@ def installed() {
       state.energyValue = 0 as double
     if (state.powerValue == null)  
       state.powerValue = 0 as int
-    runIn(1,configure)
+    configure()
 }
 
 def updated() {
     if (txtEnable) log.info "updated() : running configure()"
-
+    
+    if (state.time == null)  
+      state.time = now()
+    if (state.energyValue == null) 
+      state.energyValue = 0 as double
+    if (state.powerValue == null)  
+      state.powerValue = 0 as int
+    
     if (!state.updatedLastRanAt || now() >= state.updatedLastRanAt + 5000) {
       state.updatedLastRanAt = now()
       configure()
