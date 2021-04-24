@@ -132,7 +132,7 @@ private createCustomMap(descMap){
         } else if (descMap.cluster == "0201" && descMap.attrId == "0008") {
             map.name = "thermostatOperatingState"
             map.value = getHeatingDemand(descMap.value)
-            state.heatingDemand = map.value.toInteger()
+            if (map.value.toInteger() == 100)  state.heatingDemand = 100 as int
             map.value = (map.value.toInteger() < 5) ? "idle" : "heating"
             
             sendEvent(name: "heatingDemand", value: getHeatingDemand(descMap.value).toInteger(), unit: "%")         
@@ -156,8 +156,10 @@ private createCustomMap(descMap){
             map.unit = "W"
             energyReport(state.powerValue)
             state.powerValue = map.value.toInteger()
-            if (state.heatingDemand == 100)  
+            if (state.heatingDemand == 100)  {
               state.powerCapacity = map.value.toInteger()
+              state.remove("heatingDemand")
+            }
         }
         
     if (map) {
