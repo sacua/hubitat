@@ -20,7 +20,7 @@
 
 metadata
 {
-     definition(name: "TH112xZB Sinope Thermostat EnergyMerter V2", namespace: "sacua", author: "Samuel Cuerrier Auclair") {
+     definition(name: "TH112xZB Sinope Thermostat EnergyMerter V3", namespace: "sacua", author: "Samuel Cuerrier Auclair") {
         capability "Thermostat"
         capability "Configuration"
         capability "TemperatureMeasurement"
@@ -372,6 +372,8 @@ def setHeatingSetpoint(preciseDegrees) {
         int celsius100 = Math.round(celsius * 100)
         
         cmds += zigbee.writeAttribute(0x0201, 0x0012, 0x29, celsius100) //Write Heat Setpoint
+        
+        sendEvent(name: "thermostatSetpoint", value: celsius, unit: scale) //For interoperability with SharpTools
 
         // Submit zigbee commands
         sendZigbeeCommands(cmds)         
